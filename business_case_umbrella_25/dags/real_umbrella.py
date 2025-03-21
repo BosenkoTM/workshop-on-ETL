@@ -23,7 +23,7 @@ dag = DAG(
 
 # 1. Получение прогноза погоды
 def fetch_weather_forecast():
-    api_key = "fd8f7c156eca4bd589024706252103"  # замените на ваш API ключ
+    api_key = "_____________________________________"  # замените на ваш API ключ
     url = f"https://api.weatherapi.com/v1/forecast.json?key={api_key}&q=London&days=7"
     response = requests.get(url)
     data = response.json()
