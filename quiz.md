@@ -1,4 +1,4 @@
-### Раздел 1/ Основы ETL и Архитектура данных
+### Раздел 1. Основы ETL и Архитектура данных
 1.  В чем суть процессов **ETL** и **ELT**, и чем они отличаются от **Data Sourcing**?
 2.  Как устроена **архитектура слоев данных** (Source, Staging, Storage/DWH, Business Layer) и зачем нужен каждый слой?
 3.  Что такое **Data Warehouse**, **Data Lake** и **Data Mart**? В чем их ключевые различия?
@@ -42,4 +42,5 @@
 
 ### Раздел 7. Облачные технологии (AWS) и DevOps 
 *   Какие функции выполняют сервисы AWS: **S3, EC2, RDS, Lambda, Glue, Redshift, IAM, CloudWatch**?
+
 *   Что такое **CI/CD**, **DevOps**, **IaC** и как работает **Git** (`clone`, `pull`, `push`, `branch`)?
