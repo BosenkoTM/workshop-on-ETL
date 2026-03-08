@@ -88,4 +88,4 @@ git clone https://github.com/BosenkoTM/workshop-on-ETL.git
 
 ---
 *Материалы разработаны для поддержки учебного процесса.*
-```
+
