@@ -1,6 +1,6 @@
 # Бизнес кейс «Umbrella»
 
-1.1. Развернуть ВМ [ubuntu_mgpu.ova](https://disk.yandex.ru/d/Psofa9xtbgUEOw) в [VirtualBox](https://disk.yandex.ru/d/3fD00plnL_a4Cw).
+1.1. Развернуть ВМ  в [VirtualBox](https://disk.yandex.ru/d/3fD00plnL_a4Cw).
 
 1.2. Клонировать на ПК задание **Бизнес кейс Umbrella** в домашний каталог ВМ. 
 
