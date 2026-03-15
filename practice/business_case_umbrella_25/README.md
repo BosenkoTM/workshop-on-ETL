@@ -6,7 +6,7 @@
 
 `git clone https://github.com/BosenkoTM/workshop-on-ETL.git`
 
-проект `https://github.com/BosenkoTM/workshop-on-ETL/tree/main/business_case_umbrella_25`
+проект `https://github.com/BosenkoTM/workshop-on-ETL/tree/main/practice/business_case_umbrella_25`
 
 1.3. Запустить контейнер `01_umbrella.py` с кейсом, изучить и описать основные элементы интерфейса `Apache Airflow`. 
 
