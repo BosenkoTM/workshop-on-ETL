@@ -395,7 +395,7 @@ else:
 
 
 ```bash
-sudo chown -R 50000:0 data/
+sudo chown -R 50000:0 ./data
 sudo chown -R dev:dev /home/dev/Downloads/practice/business_case_umbrella_25
 ```
 ### Подготовка и сборка кастомного образа
