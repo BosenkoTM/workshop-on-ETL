@@ -6,61 +6,34 @@
 ## Диаграмма архитектуры
 
 ```mermaid
-flowchart TB
-    %% Внешние сущности
-    User((👨‍💻 Пользователь\n(Браузер)))
-    ExternalAPI(("🌐 Launch Library 2 API (thespacedevs.com)"))
+---
+config:
+  layout: elk
+---
+flowchart LR
+    API((Space API))
 
-    subgraph UbuntuHost [💻 Хост-система: Ubuntu 22.04 VM]
-        
-        subgraph SharedVolumes [📁 Локальные папки (Bind Mounts)]
-            DirDags{{./dags/}}
-            DirLogs{{./logs/}}
-            DirData{{./data/}}
-        end
-
-        subgraph DockerCompose [🐳 Docker Compose Environment]
-            
-            subgraph AirflowStack[⚙️ Apache Airflow (ETL)]
-                PG[(PostgreSQL Metadata DB)]
-                Webserver[Airflow Webserver(Порт 8080)]
-                Scheduler[Airflow Scheduler(Исполнитель DAG)]
-                
-                Webserver <--> PG
-                Scheduler <--> PG
-            end
-            
-            subgraph ML_UI [🧠 ML & Analytics]
-                Jupyter[Jupyter Notebook (Порт 8888)]
-                Streamlit[Streamlit Dashboard (Порт 8501)]
-            end
-        end
+    subgraph Docker Containers[Контейнеры Docker]
+        Airflow["⚙️ Airflow (Сбор данных)"]
+        Jupyter["🧠 Jupyter (ML Анализ)"]
+        Streamlit["📊 Streamlit (Дашборд)"]
     end
 
-    %% Взаимодействие с Airflow
-    ExternalAPI == "1. Скачивание JSON и Фотографий" ==> Scheduler
-    Scheduler -. "Читает код DAG" .-> DirDags
-    Scheduler == "2. Сохраняет launches.json\nи папку images/" ==> DirData
-    Scheduler -. "Пишет логи (Без захода в контейнер)" .-> DirLogs
-
-    %% Взаимодействие с Jupyter (ML)
-    Jupyter == "3. Читает фото из data/images/" ==> DirData
-    Jupyter == "4. Сохраняет ml_predictions.csv" ==> DirData
-
-    %% Взаимодействие со Streamlit (UI)
-    DirData == "5. Читает JSON и прогнозы CSV" ==> Streamlit
-
-    %% Взаимодействие пользователя
-    User -- "Управляет DAGs (http://IP:8080)" --> Webserver
-    User -- "Запускает ml.ipynb (http://IP:8888)" --> Jupyter
-    User -- "Смотрит графики (http://IP:8501)" --> Streamlit
-
-    %% Стилизация
-    style UbuntuHost fill:#f9f9f9,stroke:#333,stroke-width:2px
-    style DockerCompose fill:#e1f5fe,stroke:#0288d1,stroke-width:2px
-    style SharedVolumes fill:#fff3e0,stroke:#f57c00,stroke-width:2px,stroke-dasharray: 5 5
-    style AirflowStack fill:#ffe0b2,stroke:#fb8c00
-    style ML_UI fill:#c8e6c9,stroke:#43a047
+    subgraph Ubuntu Host[Хост Ubuntu]
+        Data[(📁 ./data Общая папка)]
+        Logs[(📁 ./logs Логи)]
+    end
+    API == "1. API запрос" ==> Airflow
+    Airflow == "2. Сохраняет фото и JSON" ==> Data
+    Airflow -. "Пишет логи напрямую" .-> Logs
+    Data == "3. Берет фото" ==> Jupyter
+    Jupyter == "4. Сохраняет CSV с прогнозом" ==> Data
+    Data == "5. Читает все данные" ==> Streamlit
+    style Data fill:#fff3e0,stroke:#f57c00
+    style Logs fill:#fff3e0,stroke:#f57c00
+    style Airflow fill:#ffe0b2,stroke:#fb8c00
+    style Jupyter fill:#c8e6c9,stroke:#43a047
+    style Streamlit fill:#b3e5fc,stroke:#03a9f4
 ```
 
 ### Пояснение к архитектуре
