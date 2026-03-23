@@ -146,4 +146,3 @@ sudo docker compose down -v --remove-orphans
 # Удалить скачанные данные (осторожно)
 # sudo rm -rf data/* logs/*
 ```
-```
