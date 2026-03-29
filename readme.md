@@ -53,7 +53,7 @@
 | Лабораторная работа | Описание | Ссылка |
 | :--- | :--- | :--- |
 | **ЛР 5.1** | Проектирование объектной модели данных. Проектирование сквозного конвейера ETL (Бизнес-кейс «Umbrella»). | [Перейти к заданию](https://github.com/BosenkoTM/workshop-on-ETL/blob/main/practice/lw_05_1.md) |
-| **ЛР 5.2** | Разработка алгоритмов для трансформации данных. Airflow DAG (Бизнес-кейс «Rocket»). | [Перейти к заданию](https://github.com/BosenkoTM/workshop-on-ETL/blob/main/practice/lw_05_2.md) |
+| **ЛР 5.2** | Разработка алгоритмов для трансформации данных. Airflow DAG (Бизнес-кейс «Rocket»). | [Перейти к заданию](https://github.com/BosenkoTM/workshop-on-ETL/tree/main/practice/business_case_rocket_26) |
 
 ### Тема 6. Автоматизация и масштабирование ETL-конвейеров
 Разработка комплексных решений и финальная оркестрация.
