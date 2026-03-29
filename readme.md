@@ -60,7 +60,7 @@
 
 | Лабораторная работа | Описание | Ссылка |
 | :--- | :--- | :--- |
-| **ЛР 6.1** | Разработка полного ETL-процесса. Оркестровка конвейера данных (Бизнес-кейс «StockSense»). | [Перейти к заданию](https://github.com/BosenkoTM/workshop-on-ETL/blob/main/practice/lw_06.md) |
+| **ЛР 6.1** | Разработка полного ETL-процесса. Оркестровка конвейера данных (Бизнес-кейс «StockSense»). | [Перейти к заданию](https://github.com/BosenkoTM/workshop-on-ETL/tree/main/practice/business_case_stocksense_26) |
 
 ---
 
