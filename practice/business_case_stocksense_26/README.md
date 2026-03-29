@@ -24,11 +24,7 @@
 
 ---
 
-## Архитектура решения 
-
-В этом разделе представлены архитектурные схемы проекта, выполненные с использованием нотации Mermaid (автоматически рендерится в GitHub и VS Code).
-
-### 1. Общая архитектура (System Architecture)
+## Общая архитектура (System Architecture)
 
 ```mermaid
 graph LR
@@ -42,6 +38,7 @@ graph LR
 
     subgraph Storage Layer
         DB[(PostgreSQL DWH<br/>wiki_results)]
+        CSV[CSV-файл<br/>Экспорт данных]
     end
 
     subgraph Business Layer
@@ -50,25 +47,27 @@ graph LR
 
     User((Бизнес-аналитик))
 
-    API -->|Скачивание файлов| AF
+    API -->|Скачивание .gz файлов| AF
     AF -->|SQL INSERT: Трансформированные данные| DB
-    DB -->|SQL SELECT: Агрегация| BI
+    AF -->|Экспорт в CSV| CSV
+    CSV -->|Чтение CSV| BI
     BI -->|Интерактивные графики| User
 ```
 
-### 2. Архитектура DAG в Airflow (ETL Pipeline)
+## Архитектура DAG в Airflow (ETL Pipeline)
 
 ```mermaid
 graph TD
     A[<b>get_data</b><br/><i>PythonOperator</i><br/>Загрузка архива wikipageviews.gz по дате] --> B[<b>extract_gz</b><br/><i>BashOperator</i><br/>Распаковка архива командой gunzip]
     B --> C[<b>fetch_pageviews</b><br/><i>PythonOperator</i><br/>Поиск нужных компаний и генерация SQL]
     C --> D[<b>write_to_postgres</b><br/><i>PostgresOperator</i><br/>Запись данных в таблицу pageview_counts]
-    
+    D --> E[<b>export_to_csv</b><br/><i>PythonOperator</i><br/>Экспорт данных из БД в CSV-файл]
+
     classDef operator fill:#f9f,stroke:#333,stroke-width:2px;
-    class A,B,C,D operator;
+    class A,B,C,D,E operator;
 ```
 
-### 3. ERD-схема базы данных (Entity-Relationship Diagram)
+## ERD-схема базы данных (Entity-Relationship Diagram)
 
 ```mermaid
 erDiagram
@@ -78,6 +77,7 @@ erDiagram
         TIMESTAMP datetime PK "Дата и время (срез данных)"
     }
 ```
+
 *Примечание. Первичный ключ составной и включает в себя название страницы и временную метку, чтобы избежать дубликатов при повторных запусках (идемпотентность).*
 
 ---
